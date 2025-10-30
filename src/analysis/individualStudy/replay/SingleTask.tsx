@@ -1,7 +1,6 @@
 import { useState } from 'react';
 import { Center, Group, Text } from '@mantine/core';
-import * as d3 from 'd3';
-
+import { ScaleLinear } from 'd3-scale';
 import { useResizeObserver } from '@mantine/hooks';
 import {
   IconCheck, IconProgress, IconX,
@@ -17,7 +16,7 @@ const HAS_CORRECT_MARGIN = 15;
 
 export function SingleTask({
   xScale, name, height, labelHeight = 0, isCorrect, hasCorrect, scaleStart, scaleEnd, incomplete, trialOrder, participantId, studyId,
-} : { name: string, height: number, xScale: d3.ScaleLinear<number, number>, labelHeight?: number, isCorrect: boolean, hasCorrect: boolean, scaleStart: number, scaleEnd: number, incomplete: boolean, trialOrder: string, participantId: string, studyId: string }) {
+} : { name: string, height: number, xScale: ScaleLinear<number, number>, labelHeight?: number, isCorrect: boolean, hasCorrect: boolean, scaleStart: number, scaleEnd: number, incomplete: boolean, trialOrder: string, participantId: string, studyId: string }) {
   const [isHover, setIsHover] = useState(false);
 
   const [ref, { width: labelWidth }] = useResizeObserver();

@@ -9,8 +9,7 @@ import { useSearchParams } from 'react-router';
 import {
   useCallback, useEffect, useMemo, useState,
 } from 'react';
-import * as d3 from 'd3';
-
+import { scaleLinear } from 'd3-scale';
 import {
   IconArrowLeft, IconArrowRight, IconDeviceDesktopDown, IconInfoCircle, IconMusicDown, IconPlayerPauseFilled, IconPlayerPlayFilled,
 } from '@tabler/icons-react';
@@ -172,9 +171,9 @@ export function ThinkAloudFooter({
 
     const allStartTimes = Object.values(participant.answers || {}).map((answer) => [answer.startTime, answer.endTime]).flat();
 
-    const extent = d3.extent(allStartTimes) as [number, number];
+    const extent = [Math.max(...allStartTimes), Math.min(...allStartTimes)];
 
-    const scale = d3.scaleLinear([margin.left, width + margin.left + margin.right]).domain(currentTrial ? [participant.answers[currentTrial].startTime, participant.answers[currentTrial].endTime] : extent).clamp(true);
+    const scale = scaleLinear([margin.left, width + margin.left + margin.right]).domain(currentTrial ? [participant.answers[currentTrial].startTime, participant.answers[currentTrial].endTime] : extent).clamp(true);
 
     return scale;
   }, [participant, currentTrial, width]);

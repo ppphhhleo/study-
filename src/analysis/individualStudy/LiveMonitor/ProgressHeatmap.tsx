@@ -1,6 +1,6 @@
 import { Tooltip } from '@mantine/core';
 import { useMemo } from 'react';
-import * as d3 from 'd3';
+import { scaleLinear } from 'd3-scale';
 
 interface ProgressHeatmapProps {
   total: number;
@@ -35,7 +35,7 @@ export function ProgressHeatmap({ total, answered, isDynamic }: ProgressHeatmapP
 
   const xScale = useMemo(() => {
     const width = Math.max(300, totalTasks * 50);
-    return d3.scaleLinear()
+    return scaleLinear()
       .domain([0, totalTasks])
       .range([MARGIN.left, width - MARGIN.right]);
   }, [totalTasks]);

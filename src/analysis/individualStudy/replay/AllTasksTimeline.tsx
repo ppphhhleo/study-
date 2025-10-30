@@ -1,5 +1,5 @@
 import { JSX, useMemo } from 'react';
-import * as d3 from 'd3';
+import { scaleLinear } from 'd3-scale';
 import {
   Center, Stack, Tooltip, Text,
 } from '@mantine/core';
@@ -34,15 +34,15 @@ export function AllTasksTimeline({
   const xScale = useMemo(() => {
     const allStartTimes = Object.values(participantData.answers || {}).filter((answer) => answer.startTime).map((answer) => [answer.startTime, answer.endTime]).flat();
 
-    const extent = d3.extent(allStartTimes) as [number, number];
+    const extent = [Math.max(...allStartTimes), Math.min(...allStartTimes)];
 
-    const scale = d3.scaleLinear([margin.left, (width * percentComplete - (percentComplete !== 1 ? 0 : margin.right))]).domain([extent[0], maxLength ? extent[0] + maxLength : extent[1]]).clamp(true);
+    const scale = scaleLinear([margin.left, (width * percentComplete - (percentComplete !== 1 ? 0 : margin.right))]).domain([extent[0], maxLength ? extent[0] + maxLength : extent[1]]).clamp(true);
 
     return scale;
   }, [maxLength, participantData.answers, percentComplete, width]);
 
   const incompleteXScale = useMemo(() => {
-    const scale = d3.scaleLinear([width * percentComplete, width - margin.right]).domain([0, Object.entries(participantData.answers || {}).filter((e) => e[1].startTime === 0).length]).clamp(true);
+    const scale = scaleLinear([width * percentComplete, width - margin.right]).domain([0, Object.entries(participantData.answers || {}).filter((e) => e[1].startTime === 0).length]).clamp(true);
 
     return scale;
   }, [participantData.answers, percentComplete, width]);
