@@ -18,10 +18,13 @@
     ]
   },
   "importedLibraries": [
-    "mic-check"
+    "mic-check",
+    "screen-recording",
+    "calvi"
   ],
   "uiConfig": {
     "recordAudio": true,
+    "recordScreen": true,
     "contactEmail": "contact@revisit.dev",
     "helpTextPath": "tutorial/assets/help.md",
     "logoPath": "revisitAssets/revisitLogoSquare.svg",
@@ -35,6 +38,20 @@
       "recordAudio": false,
       "path": "tutorial/assets/welcome.md",
       "response": []
+    },
+    "screenRecordingPermission": {
+      "description": "Get permission to start Screen recording",
+      "type": "react-component",
+      "path": "libraries/screen-recording/assets/ScreenRecording.tsx",
+      "nextButtonLocation": "belowStimulus",
+      "nextButtonText": "Continue",
+      "recordAudio": false,
+      "response": [{
+        "hidden": true,
+        "type": "reactive",
+        "id": "screenRecordingPermission",
+        "prompt": "Screen recording enabled"
+      }]
     },
     "consent": {
       "type": "markdown",
@@ -395,7 +412,10 @@
     "order": "fixed",
     "components": [
       "welcome",
+      "consent",
+      "$screen-recording.co.screenRecordingPermission",
       "website",
+      "$calvi.se.full",
       "reactiveVega",
       "reactiveWebsite",
       "reactExamplePenguins",
