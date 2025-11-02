@@ -255,7 +255,7 @@
     },
     "website": {
       "type": "website",
-      "path": "https://revisit.dev",
+      "path": "https://lumos-webapp-4aeadb3bf30d.herokuapp.com/",
       "response": []
     },
     "reactiveWebsite": {
@@ -395,20 +395,23 @@
     "order": "fixed",
     "components": [
       "welcome",
-      "consent",
-      "demographics",
-      "trainingWithFeedback",
-      "coinImage",
-      "vegaPath",
-      "vegaConfig",
-      "reactiveVega",
       "website",
+      "reactiveVega",
       "reactiveWebsite",
-      "reactExampleCars",
       "reactExamplePenguins",
+      "reactExampleCars",
+      {
+        "id": "randomOrder",
+        "order": "random",
+        "components": [
+          {"id": "reactiveVega", 
+          "order": "random", "components": ["reactiveVega", "reactiveWebsite"]},
+          {"id": "randomExample", "order": "random", "components": ["reactExamplePenguins", "reactExampleCars"]}
+        ]
+      },
       {
         "id": "attentionDeterministic",
-        "order": "fixed",
+        "order": "latinSquare",
         "components": [
           "example1",
           "example2",
