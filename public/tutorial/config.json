@@ -18,7 +18,8 @@
     ]
   },
   "importedLibraries": [
-    "mic-check"
+    "mic-check",
+    "calvi"
   ],
   "uiConfig": {
     "recordAudio": true,
@@ -396,6 +397,7 @@
     "components": [
       "welcome",
       "website",
+      "$calvi.se.full",
       "reactiveVega",
       "reactiveWebsite",
       "reactExamplePenguins",
